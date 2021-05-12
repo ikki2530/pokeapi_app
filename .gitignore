@@ -1,0 +1,7 @@
+# cache
+__pycache__/
+
+# base de datos
+db.sqlite3
+
+# migraciones
