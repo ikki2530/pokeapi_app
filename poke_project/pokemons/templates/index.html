@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="container w-50">
+    <h2>Descargar datos</h2>
+    <div class="form-group">
+        <form action="" method="POST">
+            <label>Pokemon Id</label>
+            <input type="text" name="pokemon_id" placeholder="Pokemon Id..." class="form-control">
+            <br>
+            <input type="submit" value="Obtener datos">
+        </form>
+    </div>
+
+{% if messages %}
+    {% for message in messages %}
+        <p style="color: blue;">{{message}}</p>
+    {% endfor %}
+{% endif %}
+</div>
+
+{% endblock content %}
