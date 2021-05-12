@@ -5,6 +5,7 @@
     <h2>Descargar datos</h2>
     <div class="form-group">
         <form action="" method="POST">
+            {% csrf_token %}
             <label>Pokemon Id</label>
             <input type="text" name="pokemon_id" placeholder="Pokemon Id..." class="form-control">
             <br>
