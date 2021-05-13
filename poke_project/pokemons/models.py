@@ -1,13 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Create your models here.
-
-
-class Perfil(models.Model):
-    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    nombre = models.CharField(max_length=100, null=True)
-    email = models.CharField(max_length=100, null=True)
-    fecha_creado = models.DateTimeField(auto_now_add=True, null=True)
 
 
 class Pokemon(models.Model):
@@ -23,13 +15,20 @@ class Pokemon(models.Model):
     peso = models.IntegerField()
     altura = models.IntegerField()
 
+    def __str__(self):
+        return f"id: {str(self.id_pokemon)}, nombre: {self.nombre}"
+
+
 class PokemonEvolucion(models.Model):
     id_pokemon = models.IntegerField(primary_key=True)
     nombre = models.CharField(max_length=100, null=True)
 
+    def __str__(self):
+        return f"id: {str(self.id_pokemon)}, nombre: {self.nombre}"
+
 class Evolucion(models.Model):
     """
-    Tabla de relación many to many de Pokemon y PokemonEvolucion
+    Tabla de relación many to many entre Pokemon y PokemonEvolucion
     """
     TIPOS = (
         ('PreEvolucion', 'PreEvolucion'),
@@ -38,3 +37,6 @@ class Evolucion(models.Model):
     pokemon = models.ForeignKey(Pokemon, null=True, on_delete= models.SET_NULL)
     pokemon_evolucion = models.ForeignKey(PokemonEvolucion, null=True, on_delete= models.SET_NULL)
     tipo_evolucion = models.CharField(max_length=100, null=True, choices=TIPOS)
+
+    def __str__(self):
+        return f"pokemon: ({self.pokemon}) -- pokemon {self.tipo_evolucion}: ({self.pokemon_evolucion})"
