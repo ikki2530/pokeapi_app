@@ -5,7 +5,8 @@
 * [Descripción](#descripcion)
 * [Instalación](#instalacion)
 * [Descripción de Archivos](#descripcion-de-archivos)
-* [Ejemplos de Uso]("ejemplos-de-uso")
+* [Modelos Diagrama](#modelos-diagrama)
+* [Ejemplos de Uso](#ejemplos-de-uso)
 * [Autores](#authors)
 
 
@@ -15,7 +16,7 @@ Aplicación para consumir la [PokeApi](https://pokeapi.co/docs/v2) por id del po
 ## Instalación
 
 1. Clonar este repositorio `git clone https://github.com/ikki2530/pokeapi_app.git`
-2. Crear un virtual environment y activarlo, para más información ingresa a este [link](https://realpython.com/python-virtual-environments-a-primer/)
+2. Crear un virtual environment y activarlo, para más información ingresa a este [link](https://www.geeksforgeeks.org/python-virtual-environment/)
 3. Acceder al directorio poke_project `cd /pokeapi_app/poke_project`
 4. Instalar dependencias del proyecto `pip install -r requirements.txt`
 5. Generar las migracions `python manage.py makemigrations`
@@ -25,7 +26,7 @@ Aplicación para consumir la [PokeApi](https://pokeapi.co/docs/v2) por id del po
 
 
 ## Descripción de Archivos
-[requirements.txt](/poke_project/requirements.txt) - Dependencias necesarias para el funcionamiento del proyecto.
+[requirements.txt](/poke_project/requirements.txt) - Dependencias necesarias para el proyecto.
 
 [.gitignore](.gitignore) - Lista de archivos ignorados por git
 
@@ -55,36 +56,55 @@ Aplicación para consumir la [PokeApi](https://pokeapi.co/docs/v2) por id del po
 - [poke_project/settings.py](/poke_project/poke_project/settings.py) - Contiene todas las configuraciones necesarias para el funcionamiento del proyecto.
 - [poke_project/urls.py](/poke_project/poke_project/urls.py) - Archivo de urls principal.
 
+
+## Modelos Diagrama
+
+- Para los usuarios se utilizó el modelo predeterminado de Django (User).
+
+![image](./imgs/user_db1.png)
+
+
+- Para los pokemons se creó el siguiente modelo.
+
+![image](./imgs/pokemon_db1.png)
+
+- `Pokemon`: es el modelo que almacena los pokemons con todas sus estadísticas.
+- `PokemonEvolucion`: es la evolucion de `Pokemon` (ya sea preevolucion o postevolucion).
+- `Evolucion`: determina el tipo de evolución entre `Pokemon` y `PokemonEvolucion`.
+
 ## Ejemplos de uso
 
-- Incialmente nuestra base de datos no tiene pokemons
+- Incialmente la base de datos no tiene pokemons.
 - Ingresa a tu localhost (en mi caso `http://127.0.0.1:8000`) registrate y luego te logueas.
 
 ![image](./imgs/login.png)
 
 
 
-- Después de loguearse aparece un formulario como el siguiente donde se ingresa el id del pokemon del cuál se quiera extraer información de la PokeApi y guardarla en la base de datos. (mi usuario es deadpool).
+- Después de loguearse aparece un formulario como el siguiente donde se ingresa el id del pokemon para extraer su información de la PokeApi y guardarla en la base de datos. (mi usuario es deadpool).
 
 
 ![image](./imgs/dashboard.png)
 
 
-- Ingresa un número en el formulario, si el resultado es exitoso se debe mostrar este mensaje. (id=2 corresponde a ivysaur)
+- Ingresa un número en el formulario, si el resultado es exitoso se debe mostrar este mensaje `Descarga Exitosa!!`
+- Nota: id=2 corresponde a ivysaur (postevolución de bulbasaur)
 
 
 ![image](./imgs/ingresar_id.png)
 
 ![image](./imgs/exitoso.png)
 
-- Dirección para verificar la api `127.0.0.1:8000/pokemons?name=pokemon_name`
+- Endpoint para verificar la api `127.0.0.1:8000/pokemons?name=pokemon_name`
+- Para acceder a la api debes estar logueado.
 
-- Ahora debemos verificar nuestra api con el parametro `name=ivysaur` o con `name=bulbasaur` o `name=venusaur` que son sus evoluciones.
-
-- ejemplo para verificar la api
+- Ahora se verifica la api con el parametro `name` y se le pasa el valor `ivysaur`
 
 ![image](./imgs/verificar_api.png)
 
+- También es posible verificar sus evoluciones `name=bulbasaur` o `name=venusaur`.
+
+![image](./imgs/verificar_api1.png)
 ## Autores
 
 * Diego Gomez- [Linkedin](https://www.linkedin.com/in/diego-g%C3%B3mez-8861b61a1/) / [Twitter](https://twitter.com/dagomez2530)
