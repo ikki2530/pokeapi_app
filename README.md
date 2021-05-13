@@ -59,14 +59,14 @@ Aplicación para consumir la [PokeApi](https://pokeapi.co/docs/v2) por id del po
 
 ## Modelos Diagrama
 
-- Para los usuarios se utilizó el modelo predeterminado de Django.
+- Para los usuarios se utilizó el modelo predeterminado de Django (User).
 
-![image](./imgs/user_db.png)
+![image](./imgs/user_db1.png)
 
 
 - Para los pokemons se creó el siguiente modelo.
 
-![image](./imgs/pokemon_db.png)
+![image](./imgs/pokemon_db1.png)
 
 - `Pokemon`: es el modelo que almacena los pokemons con todas sus estadísticas.
 - `PokemonEvolucion`: es la evolucion de `Pokemon` (ya sea preevolucion o postevolucion).
@@ -104,7 +104,7 @@ Aplicación para consumir la [PokeApi](https://pokeapi.co/docs/v2) por id del po
 
 - También es posible verificar sus evoluciones `name=bulbasaur` o `name=venusaur`.
 
-![image](./imgs/verificar_api2.png)
+![image](./imgs/verificar_api1.png)
 ## Autores
 
 * Diego Gomez- [Linkedin](https://www.linkedin.com/in/diego-g%C3%B3mez-8861b61a1/) / [Twitter](https://twitter.com/dagomez2530)
