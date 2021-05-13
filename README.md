@@ -26,7 +26,7 @@ Aplicación para consumir la [PokeApi](https://pokeapi.co/docs/v2) por id del po
 
 
 ## Descripción de Archivos
-[requirements.txt](/poke_project/requirements.txt) - Dependencias necesarias para el funcionamiento del proyecto.
+[requirements.txt](/poke_project/requirements.txt) - Dependencias necesarias para el proyecto.
 
 [.gitignore](.gitignore) - Lista de archivos ignorados por git
 
