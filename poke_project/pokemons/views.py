@@ -3,8 +3,13 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-# Create your views here.
-from .models import Pokemon, PokemonEvolucion
+# rest framework
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.http import JsonResponse
+
+# customize
+from .models import Pokemon, PokemonEvolucion, Evolucion
 from .decorators import unauthenticated_user
 from .forms import CreateUserForm
 from .pokemons2 import search_byid
@@ -48,8 +53,12 @@ def index(request):
                     # código para descargar datos
                     pokemons_data, evolution_flags = search_byid(id_pokemon)
 
-                    evolution_relations(pokemons_data, evolution_flags)
-                    messages.success(request, "Descarga exitosa!!")
+                    if pokemons_data and evolution_flags:
+                        evolution_relations(pokemons_data, evolution_flags)
+                        messages.success(request, "Descarga exitosa!!")
+                    else:
+                        mg = "Id no encontrado en la PokeApi"
+                        messages.info(request, mg)
             else:
                 messages.info(request, 'Id debe ser mayor que 0')
         else:
@@ -96,3 +105,51 @@ def loginPage(request):
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+@login_required(login_url='login')
+@api_view(['GET'])
+def pokemonList(request):
+    """
+    Serializar los pokemons
+    """
+    name = request.query_params.get("name", "")
+    response = {}
+    if name:
+        if Pokemon.objects.filter(nombre=name).exists():
+            pokemon = Pokemon.objects.get(nombre=name)
+            id_pokemon = pokemon.id_pokemon
+            response["id_pokemon"] = id_pokemon
+            response["nombre"] = pokemon.nombre
+            response["peso"] = pokemon.peso
+            response["altura"] = pokemon.altura
+            estadisticas = {
+                "hp": pokemon.hp,
+                "ataque": pokemon.ataque,
+                "defensa": pokemon.defensa,
+                "ataque_especial": pokemon.ataque_especial,
+                "defensa_especial": pokemon.defensa_especial,
+                "velocidad": pokemon.velocidad
+            }
+            response["estadisticas_base"] = estadisticas
+
+            evolutions = Evolucion.objects.filter(pokemon=pokemon)
+            evolution_list = []
+            temp = {}
+            i = 0
+            for evol in evolutions.iterator():
+                pokemon_evol = evol.pokemon_evolucion
+                poke_evol_id = pokemon_evol.id_pokemon
+                poke_evol_name = pokemon_evol.nombre
+                pokemon_evol_tipo = evol.tipo_evolucion
+                temp["id_evolucion"] = poke_evol_id
+                temp["nombre_evolucion"] = poke_evol_name
+                temp["tipo_evolucion"] = pokemon_evol_tipo
+                evolution_list.append(temp)
+                temp = {}
+            response["cadena_evolucion"] = evolution_list
+        else:
+            mg = "No existe el nombre " + name + " en la base de datos"
+            response["mensaje"] = mg
+    else:
+        response["mensaje"] = "envía el parámetro 'name'"
+    return JsonResponse(response)

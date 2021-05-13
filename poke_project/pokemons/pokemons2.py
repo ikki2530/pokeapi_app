@@ -1,6 +1,7 @@
 import requests
 import copy
 import re
+import time
 
 
 def get_evolution_data(list_names=[]):
@@ -146,7 +147,7 @@ def request_pokemon(url_pok="", id_pok=None, name=None):
         url_pokemon = "{}/{}".format(url_pokemon, name)
 
     pokemon_info = {}
-
+    time.sleep(0.2)
     response = requests.get(url_pokemon)
     if response.status_code == 200:
         payload = response.json()
@@ -188,6 +189,7 @@ def search_byid(id_pok=None):
     """
     url_pokemon = 'https://pokeapi.co/api/v2/pokemon/'
     pokemon_info = request_pokemon(url_pokemon, id_pok=id_pok)
+
     species_url = pokemon_info.get("species_url", "")
     if species_url:
         evolution_url, pokemon_root = request_species(species_url)
