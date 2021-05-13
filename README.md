@@ -5,6 +5,7 @@
 * [Descripción](#descripcion)
 * [Instalación](#instalacion)
 * [Descripción de Archivos](#descripcion-de-archivos)
+* [Ejemplos de Uso]("ejemplos-de-uso")
 * [Autores](#authors)
 
 
@@ -53,3 +54,37 @@ Aplicación para consumir la [PokeApi](https://pokeapi.co/docs/v2) por id del po
 ### `poke_project/poke_project` Contiene el desarrollo de la aplicación (vistas, modelos, etc).
 - [poke_project/settings.py](/poke_project/poke_project/settings.py) - Contiene todas las configuraciones necesarias para el funcionamiento del proyecto.
 - [poke_project/urls.py](/poke_project/poke_project/urls.py) - Archivo de urls principal.
+
+## Ejemplos de uso
+
+- Incialmente nuestra base de datos no tiene pokemons
+- Ingresa a tu localhost (en mi caso `http://127.0.0.1:8000`) registrate y luego te logueas.
+
+![image](./imgs/login.png)
+
+
+
+- Después de loguearse aparece un formulario como el siguiente donde se ingresa el id del pokemon del cuál se quiera extraer información de la PokeApi y guardarla en la base de datos. (mi usuario es deadpool).
+
+
+![image](./imgs/dashboard.png)
+
+
+- Ingresa un número en el formulario, si el resultado es exitoso se debe mostrar este mensaje. (id=2 corresponde a ivysaur)
+
+
+![image](./imgs/ingresar_id.png)
+
+![image](./imgs/exitoso.png)
+
+- Dirección para verificar la api `127.0.0.1:8000/pokemons?name=pokemon_name`
+
+- Ahora debemos verificar nuestra api con el parametro `name=ivysaur` o con `name=bulbasaur` o `name=venusaur` que son sus evoluciones.
+
+- ejemplo para verificar la api
+
+![image](./imgs/verificar_api.png)
+
+## Autores
+
+* Diego Gomez- [Linkedin](https://www.linkedin.com/in/diego-g%C3%B3mez-8861b61a1/) / [Twitter](https://twitter.com/dagomez2530)
